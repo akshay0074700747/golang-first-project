@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Admin Dashboard</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="/search" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="query" placeholder="Search Users">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Search</button>
+                        </form>
+                        <table class="table">
+                            <tbody>
+                                {{range .search}}
+                                <tr>
+                                    <td>{{.Username}}</td>
+                                    <td>
+                                        <a href="/edit/{{.Username}}" class="btn btn-primary btn-sm">Edit</a>    
+                                        <a href="/delete/{{.Username}}" class="btn btn-danger btn-sm">Delete</a>
+
+                                    </td>
+                                </tr>
+                                {{end}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">User List</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>UserName</th>
+                                    <th>Email</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{range .users}}
+                                <tr>
+                                    <td>{{.Username}}</td>
+                                    <td>{{.Email}}</td>
+                                    <td>
+                                        <a href="/edit/{{.Username}}" class="btn btn-primary btn-sm">Edit</a>
+                                        <a href="/delete/{{.Username}}" class="btn btn-danger btn-sm">Delete</a>
+                                    </td>
+                                </tr>
+                                {{end}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <form action="/logoutadmin" method="get">
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

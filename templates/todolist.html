@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">To-Do List</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- To-Do Form -->
+                        <form action="/add-todo/{{.user}}" method="post">
+                            <div class="form-group">
+                                <label for="todoName">To-Do Name</label>
+                                <input type="text" class="form-control" id="todoName" name="todoName" placeholder="Enter a to-do name">
+                            </div>
+                            <div class="form-group">
+                                <label for="todoTime">To-Do Time</label>
+                                <input type="datetime" class="form-control" id="todoTime" name="todoTime" placeholder="Enter the time for the to-do">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Add</button>
+                        </form>
+                        
+                        <!-- To-Do List -->
+                        <h4 class="mt-4">To-Do Items:</h4>
+                        <ul id="todo-list">
+                            {{range .todos}}
+                            <li>
+                                {{ .Name}} {{ .Date}}
+                                <a href="/edittodos/{{.Username}}/{{.Name}}" class="btn btn-primary btn-sm">Edit</a>
+                                <a href="/deletetodos/{{.Username}}/{{.Name}}" class="btn btn-danger btn-sm">Delete</a>
+                                <br><br>
+                            </li>
+                            {{end}}
+                        </ul>
+                        
+
+                    </div>
+                    <div class="card-footer text-center">
+                        <form action="/logout" method="get">
+                            <button type="submit" class="btn btn-danger">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
